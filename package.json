@@ -1,0 +1,30 @@
+{
+  "name": "belkaDance",
+  "version": "1.0.0",
+  "description": "Flower Shop Platform",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm run dev\"",
+    "install-all": "npm install && cd client && npm install && cd ../server && npm install",
+    "start": "cd server && npm start",
+    "test-api": "node test-api.js"
+  },
+  "keywords": [
+    "flowers",
+    "shop",
+    "platform"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "chalk": "^4.1.2",
+    "concurrently": "^8.2.2",
+    "newman": "^6.0.0",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.3"
+  },
+  "dependencies": {
+    "react-toastify": "^11.0.5"
+  }
+}

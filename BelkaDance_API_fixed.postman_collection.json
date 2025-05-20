@@ -1,0 +1,771 @@
+{
+	"info": {
+		"_postman_id": "4e6b1a8f-234d-45db-a6d0-c6cc84b5fa9e",
+		"name": "BelkaDance API",
+		"description": "Коллекция запросов для тестирования API проекта BelkaDance (Цветы)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Аутентификация",
+			"item": [
+				{
+					"name": "Регистрация пользователя",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Новый Пользователь\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"user\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"register"
+							]
+						},
+						"description": "Регистрация нового пользователя в системе"
+					}
+				},
+				{
+					"name": "Вход (поставщик)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"supplier1@example.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"login"
+							]
+						},
+						"description": "Вход пользователя с ролью поставщика"
+					}
+				},
+				{
+					"name": "Вход (продавец)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"seller1@example.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"login"
+							]
+						},
+						"description": "Вход пользователя с ролью продавца"
+					}
+				},
+				{
+					"name": "Получить профиль",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3001/api/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"profile"
+							]
+						},
+						"description": "Получение информации о текущем пользователе"
+					}
+				}
+			],
+			"description": "Запросы для регистрации и авторизации пользователей"
+		},
+		{
+			"name": "Цветы",
+			"item": [
+				{
+					"name": "Получить все цветы",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/flowers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"flowers"
+							]
+						},
+						"description": "Получение списка всех цветов"
+					}
+				},
+				{
+					"name": "Получить цветок по ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/flowers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"flowers",
+								"1"
+							]
+						},
+						"description": "Получение информации о конкретном цветке по его ID"
+					}
+				},
+				{
+					"name": "Добавить новый цветок (поставщик)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-access-token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Синие хризантемы\",\n  \"type\": \"Хризантемы\",\n  \"season\": \"Осень\",\n  \"country\": \"Япония\",\n  \"variety\": \"Императорская\",\n  \"price\": 300,\n  \"imageUrl\": \"https://images.pexels.com/photos/931168/pexels-photo-931168.jpeg\",\n  \"description\": \"Редкий сорт японских хризантем с насыщенным синим цветом.\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/flowers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"flowers"
+							]
+						},
+						"description": "Создание нового цветка (только для пользователей с ролью поставщика)"
+					}
+				},
+				{
+					"name": "Удалить цветок (поставщик)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3001/api/flowers/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"flowers",
+								"5"
+							]
+						},
+						"description": "Удаление цветка по ID (только для поставщика, создавшего цветок)"
+					}
+				},
+				{
+					"name": "Поиск цветов по сезону",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/flowers/search/by-season?season=Лето",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"flowers",
+								"search",
+								"by-season"
+							],
+							"query": [
+								{
+									"key": "season",
+									"value": "Лето"
+								}
+							]
+						},
+						"description": "Поиск цветов по сезону (Весна, Лето, Осень, Зима, Круглый год)"
+					}
+				},
+				{
+					"name": "Поиск цветов по стране",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/flowers/search/by-country?country=Голландия",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"flowers",
+								"search",
+								"by-country"
+							],
+							"query": [
+								{
+									"key": "country",
+									"value": "Голландия"
+								}
+							]
+						},
+						"description": "Поиск цветов по стране происхождения"
+					}
+				},
+				{
+					"name": "Поиск цветов по сорту",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/flowers/search/by-variety?variety=Red Naomi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"flowers",
+								"search",
+								"by-variety"
+							],
+							"query": [
+								{
+									"key": "variety",
+									"value": "Red Naomi"
+								}
+							]
+						},
+						"description": "Поиск цветов по сорту"
+					}
+				}
+			],
+			"description": "Запросы для работы с цветами"
+		},
+		{
+			"name": "Поставщики",
+			"item": [
+				{
+					"name": "Получить всех поставщиков",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/suppliers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"suppliers"
+							]
+						},
+						"description": "Получение списка всех поставщиков"
+					}
+				},
+				{
+					"name": "Получить поставщика по ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/suppliers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"suppliers",
+								"1"
+							]
+						},
+						"description": "Получение информации о конкретном поставщике по его ID"
+					}
+				},
+				{
+					"name": "Получить цветы поставщика",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/suppliers/1/flowers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"suppliers",
+								"1",
+								"flowers"
+							]
+						},
+						"description": "Получение всех цветов, связанных с конкретным поставщиком"
+					}
+				}
+			],
+			"description": "Запросы для работы с поставщиками"
+		},
+		{
+			"name": "Продавцы",
+			"item": [
+				{
+					"name": "Получить всех продавцов",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/sellers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"sellers"
+							]
+						},
+						"description": "Получение списка всех продавцов"
+					}
+				},
+				{
+					"name": "Получить продавца по ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/sellers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"sellers",
+								"1"
+							]
+						},
+						"description": "Получение информации о конкретном продавце по его ID"
+					}
+				},
+				{
+					"name": "Получить цветы продавца",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/sellers/1/flowers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"sellers",
+								"1",
+								"flowers"
+							]
+						},
+						"description": "Получение всех цветов, связанных с конкретным продавцом"
+					}
+				},
+				{
+					"name": "Добавить цветок в продажу (продавец)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-access-token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"flowerId\": 2,\n  \"price\": 450\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/sellers/flowers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"sellers",
+								"flowers"
+							]
+						},
+						"description": "Добавление цветка в ассортимент продавца (только для пользователей с ролью продавца)"
+					}
+				},
+				{
+					"name": "Удалить цветок из продажи (продавец)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3001/api/sellers/flowers/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"sellers",
+								"flowers",
+								"2"
+							]
+						},
+						"description": "Удаление цветка из ассортимента продавца (только для продавца, добавившего цветок)"
+					}
+				},
+				{
+					"name": "Получить топ продавцов с дорогими цветами",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/sellers/top/expensive",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"sellers",
+								"top",
+								"expensive"
+							]
+						},
+						"description": "Получение списка продавцов, отсортированных по цене цветов"
+					}
+				},
+				{
+					"name": "Получить совпадающих поставщиков и продавцов",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/sellers/matching-suppliers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"sellers",
+								"matching-suppliers"
+							]
+						},
+						"description": "Получение информации о поставщиках и продавцах, которые продают одни и те же цветы"
+					}
+				}
+			],
+			"description": "Запросы для работы с продавцами"
+		},
+		{
+			"name": "Запросы",
+			"item": [
+				{
+					"name": "Создать запрос",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-access-token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"flowerType\": \"Орхидеи\",\n  \"quantity\": 50,\n  \"deadline\": \"2023-07-30\",\n  \"contactPhone\": \"+7 (999) 123-45-67\",\n  \"contactEmail\": \"user@example.com\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/requests",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"requests"
+							]
+						},
+						"description": "Создание нового запроса на цветы (для всех авторизованных пользователей)"
+					}
+				},
+				{
+					"name": "Получить все запросы (админ)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3001/api/requests/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"requests",
+								"all"
+							]
+						},
+						"description": "Получение всех запросов (только для администраторов)"
+					}
+				},
+				{
+					"name": "Получить запросы текущего пользователя",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3001/api/requests/my",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"requests",
+								"my"
+							]
+						},
+						"description": "Получение запросов текущего авторизованного пользователя"
+					}
+				},
+				{
+					"name": "Получить запрос по ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3001/api/requests/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"requests",
+								"1"
+							]
+						},
+						"description": "Получение информации о конкретном запросе по его ID"
+					}
+				},
+				{
+					"name": "Обновить статус запроса",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-access-token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"inProgress\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/requests/1/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"requests",
+								"1",
+								"status"
+							]
+						},
+						"description": "Обновление статуса запроса (pending, inProgress, completed, cancelled)"
+					}
+				},
+				{
+					"name": "Удалить запрос",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3001/api/requests/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"requests",
+								"1"
+							]
+						},
+						"description": "Удаление запроса (можно удалить только свой запрос, если вы не админ)"
+					}
+				}
+			],
+			"description": "Запросы для работы с заявками"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Автоматическое сохранение токена при успешной авторизации",
+					"if (pm.response.code === 200 && pm.request.url.toString().includes(\"/login\")) {",
+					"    var jsonData = pm.response.json();",
+					"    if (jsonData && jsonData.token) {",
+					"        pm.environment.set(\"token\", jsonData.token);",
+					"        console.log(\"Токен успешно сохранен в переменную окружения\");",
+					"    }",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+} 
